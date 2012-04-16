@@ -16,6 +16,7 @@ public class Client {
 		String in = reader.readLine();
 		while(in != null){
 			writer.println(in);
+			writer.flush();
 			if(in.equals(".exit"))
 				break;
 			in = reader.readLine();

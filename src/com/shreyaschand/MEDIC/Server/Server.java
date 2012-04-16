@@ -52,12 +52,13 @@ public class Server {
 					doctors.put(handshake.substring(5), new Doctor(socket, writer, reader));
 					writer.println("okay");
 					writer.flush();
-					//clean();
+					System.out.println(doctorList());
 					return;
 				} else {
 					System.out.println("\tIt's a patient!");
 					String doctorName = "$list";
 					while(doctorName.equals("$list")){
+						System.out.println(doctorList());
 						writer.println(doctorList());
 						writer.flush();
 						doctorName = reader.readLine();
@@ -80,9 +81,11 @@ public class Server {
 		}
 
 		private void mediateConversation(Doctor doctor) throws IOException {
+			System.out.println("Conversating now.");
 			String message;
 			while((message = reader.readLine()) != null){
 				doctor.writer.println(message);
+				doctor.writer.flush();
 			}
 			doctor.writer.close();
 			doctor.reader.close();
